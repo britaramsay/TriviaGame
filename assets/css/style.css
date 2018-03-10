@@ -1,6 +1,5 @@
 .jumbotron {
-    background-color: rgba(255, 215, 0, .8);
-    text-align: center;
+    background-color: rgba(255, 215, 0, .0);
 }
 
 h1 {
@@ -14,11 +13,19 @@ body {
 }
 
 .btn {
-    background-color: rgba(12, 12, 12, 0.8);
-    color: rgba(245, 245, 245, .8);
+    background-color: rgba(12, 12, 12, 0.7);
+    color: rgba(245, 245, 245, .7);
 }
 
 .btn:hover, .btn:active, .btn:focus, .btn:visited, .btn:link {
-    background-color: rgba(245, 245, 245, .8);
-    color: rgba(12, 12, 12, 0.8);
+    background-color: rgba(245, 245, 245, .7);
+    color: rgba(12, 12, 12, 0.7);
+}
+
+#main-section {
+    background-color: rgba(255, 215, 0, .8);
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 5vh;
+    height: 90vh;
 }
