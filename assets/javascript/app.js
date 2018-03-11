@@ -52,8 +52,6 @@ function displayQuestion(questionNumber) {
         });
 
     function chooseAnswer() {
-        console.log($('input[name=radio]:checked', '#answers').val());
-
         if ($('input[name=radio]:checked', '#answers').val() == rightAnswer) {
             var message = "<h2>Correct!</h2><p>";
             correct++;
@@ -86,7 +84,6 @@ function nextQuestion() {
         stopCountdown();
         $("#question").hide();
         $("#countdown").hide();
-        console.log(correct);
         $("#score").html("<h2>Correct: " + correct + "<br>Incorrect: " + incorrect + "<br>Unanswered: " + unanswered + "</h2>").show();
     }
     $("#answers").hide();
@@ -111,6 +108,7 @@ function count(){
     if (time < 0) {
         $("#question").hide();
         $("#answers").empty();
+
         var gif = $("<div>");
         gif.html("<h2>Out of time</h2><p>The answer is </p>" + questions[questionNumber].answers[questions[questionNumber].correct]);
         $("#answers").append(gif);
@@ -123,90 +121,3 @@ function count(){
         $("#countdown").html(time);
     }
 }
-
-
-
-
-
-
-
-
-
-
-// function start(){
-//     // if clock is not running
-//     if(!clockRunning) {
-//         // Call count every second
-//         countdown = setInterval(count, 1000);
-//         // Set clockRunning to true
-//         clockRunning = true;
-//     }
-// }
-
-// function count(){
-//     // Decrement seconds remaining
-//     time--;
-
-//     if (time < 0) {
-//         $("#answers").empty();
-//         var gif = $("<div>");
-//         gif.html("<h2>Out of time</h2><p>The answer is </p>");
-//         $("#answers").append(gif);
-//         questionNumber++;
-
-//         setTimeout(stop, 3000);
-//     }
-//     else{
-//         // If there is time left, display updated time value
-//         $("#countdown").html(time);
-//     }
-// }
-
-// function stop() {
-//     // $("#answers").empty();
-//     // $(".answer").empty();
-
-//     clearInterval(countdown);
-//     clockRunning = false;
-//     if(questionNumber < questions.length - 1);
-//         showTimer();
-// }
-
-// function showQuestion(indx){
-//         $("#question").text(questions[questionNumber].question);
-//             console.log("q: " + questions[questionNumber].correct);
-
-//         for(var i = 0; i < 4; i++) {
-
-//             var answer = $("<div>");
-//                 answer.html(questions[questionNumber].answers[i]);
-//                 answer.attr("data-question", questions[questionNumber].answers[i]);
-//                 console.log(answer.attr("data-question"));
-//                 answer.attr("data-correct", questions[questionNumber].correct);
-//                 answer.addClass("answer");
-
-//             $("#answers").append(answer);
-//         }
-
-//         $("#answers").on("click", ".answer", function () {  
-//             console.log($(this).attr("data-question") + " " + questions[questionNumber].answers[questions[questionNumber].correct]);
-
-//             if($(this).attr("data-question") == questions[questionNumber].answers[questions[questionNumber].correct]) {
-//                 $("#answers").empty();
-//                 var gif = $("<div>");
-//                 gif.html("<h2>Correct!</h2><p>" + questions[questionNumber].answers[questions[questionNumber].correct] + "</p>");
-//                 $("#answers").append(gif);
-                
-//                 setTimeout(stop, 3000);
-//             }
-//             else {
-//                 $("#answers").empty();
-//                 var gif = $("<div>");
-//                 gif.html("<h2>Wrong!</h2><p>The answer is " + questions[questionNumber].answers[questions[questionNumber].correct] + "</p>");
-//                 $("#answers").append(gif);
-    
-//                 setTimeout(stop, 3000);
-//             }
-//         });
-//         return questionNumber;
-// }
