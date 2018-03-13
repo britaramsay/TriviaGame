@@ -6,10 +6,19 @@ var questions = [{question: "What?", answers: ["That", "No1", "No2", "No3"], cor
                  {question: "When?", answers: ["Thats", "No1w", "No2", "No3"], correct: 2}];
 
 $("#play").on("click", function() {
+    newGame();
+})
+
+function newGame() {
     $("#play").hide();
 
+    correct = 0,
+    incorrect = 0,
+    unanswered = 0,
+    clockRunning = false;
+
     showTimer();
-})
+}
 
 var questionNumber = 0,
     time = 20,
@@ -21,6 +30,7 @@ var questionNumber = 0,
 
 function showTimer() {  
     time = 20;
+    questionNumber = 0;
     $("#countdown").html(time);
     startCountdown();
     displayQuestion(questionNumber);
@@ -30,21 +40,41 @@ function displayQuestion(questionNumber) {
     var rightAnswer;
 
     $("#question").html(questions[questionNumber].question).show();
+        $('#answers').empty();
+
         for(var i = 0; i < 4; i++) {
 
+
+            /*
+            <div class="form-check radio-green">
+            <input class="form-check-input" name="group101" type="radio" id="radio103">
+            <label class="form-check-label" for="radio103">Option 1</label>
+
+
+            </div> */
+            var form = document.createElement('form');
+            var div = document.createElement('div');
+            div.className = 'form-check';
             var select = document.createElement('input');
             select.type = 'radio';
             select.name = 'radio';
+
+            // select.className = 'form-check-input';
+            // div.appendChild(select);
             select.value = questions[questionNumber].answers[i];
 
-            var answer = document.createElement('p');
-
-            answer.innerHTML = questions[questionNumber].answers[i];
+            var answer = document.createElement('label');
+            answer.className = 'form-check-label';
+            answer.innerHTML = questions[questionNumber].answers[i] + " ";
+            answer.appendChild(select);
+            div.appendChild(answer);
+            form.appendChild(div);
 
             document.getElementById('answers').style.display = 'block';
            
             rightAnswer = questions[questionNumber].answers[questions[questionNumber].correct];
-            document.getElementById('answers').appendChild(answer).appendChild(select);
+            // document.getElementById('answers').appendChild(div);
+            $('#answers').append(form);
             
         }
         $('#answers input').on('change', function() {
@@ -82,9 +112,19 @@ function nextQuestion() {
     
     if (questionNumber === questions.length) {
         stopCountdown();
-        $("#question").hide();
-        $("#countdown").hide();
+        $("#question").empty();
+        $('#answers').empty();
+        // document.getElementById('answers').innerHTML = "";
+        $("#countdown").empty();
         $("#score").html("<h2>Correct: " + correct + "<br>Incorrect: " + incorrect + "<br>Unanswered: " + unanswered + "</h2>").show();
+
+        $('#play').show();
+        $("#play").on("click", function() {
+            $("#score").empty();
+            stopCountdown();
+
+            newGame();
+        })
     }
     $("#answers").hide();
     $("#answers").empty();
