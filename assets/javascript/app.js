@@ -14,32 +14,31 @@ function newGame() {
 
     correct = 0,
     incorrect = 0,
-    unanswered = 0,
-    clockRunning = false;
+    unanswered = 0;
 
     showTimer();
 }
 
 var questionNumber = 0,
+    showQuestion,
     time = 20,
     correct = 0,
     incorrect = 0,
-    unanswered = 0,
-    clockRunning = false;
+    unanswered = 0;
 
 function showTimer() {  
     time = 20;
     questionNumber = 0;
-    clockRunning = false;
 
     $("#countdown").show();
     $("#countdown").html(time);
     startCountdown();
-    displayQuestion(questionNumber);
+    displayQuestion();
 }
 
-function displayQuestion(questionNumber) {
+function displayQuestion() {
     var rightAnswer;
+    console.log(questionNumber);
 
     $("#question").html(questions[questionNumber].question).show();
         $('#answers').empty();
@@ -105,8 +104,10 @@ function nextQuestion() {
     if (questionNumber === questions.length) {
         stopCountdown();
         $("#question").empty();
+        $("#answers").hide();
         $('#answers').empty();
         stopCountdown();
+        console.log(showQuestion);
 
         $("#countdown").hide();
         $("#score").html("<h2>Correct: " + correct + "<br>Incorrect: " + incorrect + "<br>Unanswered: " + unanswered + "</h2>").show();
@@ -118,20 +119,32 @@ function nextQuestion() {
             newGame();
         })
     }
-    $("#answers").hide();
-    $("#answers").empty();
-    time = 21;
-    count();
-    startCountdown();
-    displayQuestion(questionNumber);    
+    else {
+        $("#answers").hide();
+        $("#answers").empty();
+        time = 21;
+        count();
+        startCountdown();
+        displayQuestion(questionNumber);    
+    } 
 }
   
 function startCountdown() {
+    if(showQuestion) {
+        clearInterval(showQuestion);
+        console.log('hi');
+
+    }
     showQuestion = setInterval(count, 1000);
+
+    // if(clockRunning == false) {
+    //     clockRunning = true;
+    // }
 }
 
 function stopCountdown() {
     clearInterval(showQuestion);
+    // clockRunning = false;
 }
   
 function count(){
