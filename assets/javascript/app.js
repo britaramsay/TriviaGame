@@ -22,7 +22,6 @@ function newGame() {
 
 var questionNumber = 0,
     time = 20,
-    countdown,
     correct = 0,
     incorrect = 0,
     unanswered = 0,
@@ -31,6 +30,9 @@ var questionNumber = 0,
 function showTimer() {  
     time = 20;
     questionNumber = 0;
+    clockRunning = false;
+
+    $("#countdown").show();
     $("#countdown").html(time);
     startCountdown();
     displayQuestion(questionNumber);
@@ -44,14 +46,6 @@ function displayQuestion(questionNumber) {
 
         for(var i = 0; i < 4; i++) {
 
-
-            /*
-            <div class="form-check radio-green">
-            <input class="form-check-input" name="group101" type="radio" id="radio103">
-            <label class="form-check-label" for="radio103">Option 1</label>
-
-
-            </div> */
             var form = document.createElement('form');
             var div = document.createElement('div');
             div.className = 'form-check';
@@ -59,8 +53,6 @@ function displayQuestion(questionNumber) {
             select.type = 'radio';
             select.name = 'radio';
 
-            // select.className = 'form-check-input';
-            // div.appendChild(select);
             select.value = questions[questionNumber].answers[i];
 
             var answer = document.createElement('label');
@@ -114,14 +106,14 @@ function nextQuestion() {
         stopCountdown();
         $("#question").empty();
         $('#answers').empty();
-        // document.getElementById('answers').innerHTML = "";
-        $("#countdown").empty();
+        stopCountdown();
+
+        $("#countdown").hide();
         $("#score").html("<h2>Correct: " + correct + "<br>Incorrect: " + incorrect + "<br>Unanswered: " + unanswered + "</h2>").show();
 
         $('#play').show();
         $("#play").on("click", function() {
             $("#score").empty();
-            stopCountdown();
 
             newGame();
         })
@@ -129,6 +121,7 @@ function nextQuestion() {
     $("#answers").hide();
     $("#answers").empty();
     time = 21;
+    count();
     startCountdown();
     displayQuestion(questionNumber);    
 }
