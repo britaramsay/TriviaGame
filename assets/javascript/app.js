@@ -1,10 +1,10 @@
 // Questions
-var questions = [{question: "What?", answers: ["That", "No1", "No2", "No3"], correct: 0},
-                 {question: "Where?", answers: ["Thatg", "Noy1", "No2", "No3"], correct: 1},
-                 {question: "When?", answers: ["Thats", "No1w", "No2", "No3"], correct: 2},
-                 {question: "What?", answers: ["That", "No1", "No2", "No3"], correct: 0},
-                 {question: "Where?", answers: ["Thatg", "Noy1", "No2", "No3"], correct: 1},
-                 {question: "When?", answers: ["Thats", "No1w", "No2", "No3"], correct: 2}];
+var questions = [{question: "Which song have members of the gang never sang together?", answers: ["'Space Oddity' by David Bowie", "'Psycho Killer' by Talking Heads", "'Just A Friend' by Biz Markie", "'MotownPhilly' By Boyz II Men"], correct: 0, gif: "assets/images/boyziimen.gif"},
+                 {question: "How many times does Charlie's mom believe she must flip light switches to prevent Charlie from dying?", answers: [5, 7, 3, 4], correct: 2, gif:"assets/images/charlie-mom.jpg"},
+                 {question: "Which character stalks the waitress?", answers: ["Mac", "Dee", "Charlie", "Dennis"], correct: 2, gif: "assets/images/charlie-waitress.gif"},
+                 {question: "Which is not a drawing from Charlie's dream book?", answers: ["Tooth Oven", "Worm Hat", "Bird with Teeth", "Denim Chicken"], correct: 0, gif: "assets/images/charlie-dream.gif"},
+                 {question: "What was Dee's nickname in school?", answers: ["Dr. Mantis Toboggan", "Aluminum Monster", "The Professor", "Wildcard"], correct: 1, gif: "assets/images/Aluminum-Monster.gif"},
+                 {question: "What is the McPoyle's favorite drink?", answers: ["Apple Juice", "Coffee", "Grape Juice", "Milk"], correct: 3, gif: "assets/images/mcpoyles.gif"}];
 
 // Declare interval id             
 var showQuestion;
@@ -68,11 +68,11 @@ function displayQuestion() {
             // Append label to form
             form.appendChild(div);
             // Show answers div
-            document.getElementById('answers').style.display = 'block';
+            // document.getElementById('answers').style.display = 'block';
             // Set right answer for this question
             rightAnswer = questions[questionNumber].answers[questions[questionNumber].correct];
             // Append form to answers
-            $('#answers').append(form);    
+            $('#answers').append(form).show();    
         }
         // When one answer is selected
         $('#answers input').on('change', function() {
@@ -81,7 +81,6 @@ function displayQuestion() {
         });
 
     function chooseAnswer() {
-        console.log($('input[name=radio]:checked', '#answers'));
         // If the value of the radio button checked is the right answer
         if ($('input[name=radio]:checked', '#answers').val() == rightAnswer) {
             // Set message
@@ -106,13 +105,15 @@ function displayQuestion() {
         // Create div for question results
         var questionResults = $("<div>");
         // Set html for question results
-        questionResults.html(msg + rightAnswer + "</p>");
+        questionResults.append(msg + rightAnswer);
+
+        questionResults.append($('<img>',{id:'gif',src:questions[questionNumber].gif}));
         // Append to answers div
         $("#answers").append(questionResults);
         // Stop the countdown
         stopCountdown();
         // Call next question in a few seconds
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 5 * 1000);
     }
 }
   

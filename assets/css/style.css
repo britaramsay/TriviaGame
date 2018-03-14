@@ -3,6 +3,7 @@
     padding-bottom: 0px;
 }
 
+
 h1 {
     color: rgba(12, 12, 12, 0.8);
     text-shadow: 2px 2px 8px rgba(66, 65, 65, .9);
@@ -11,6 +12,12 @@ h1 {
 body {
     background-image: url("../images/jumbotron-bkground.jpg");
     background-size: cover;
+}
+
+#gif {
+    height: 20vw;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 25px rgb(87, 86, 86);
 }
 
 .btn {
@@ -32,13 +39,13 @@ body {
     border-radius: 15px;
     text-align: center;
     margin-top: 5vh;
-    height: 90vh;
+    margin-bottom: 5vh;
     border: 2px black solid;
-
+    padding-bottom: 20px;
 }
 
 label {
-    font-weight: 100
+    font-weight: 100;
 }
 
 #countdown {
@@ -48,7 +55,7 @@ label {
 #question {
     background-color: rgba(245, 245, 245, .6);
     border-radius: 15px;
-    line-height: 80px;
+    padding: 20px;
     width: 80%;
     display: none;
     margin: 0 auto;
@@ -57,6 +64,10 @@ label {
     text-align: center;
     font-size: 20px;
     font-weight: 400;
+}
+
+#question text {
+    line-height: 5px;
 }
 
 .form-check:hover {
@@ -68,6 +79,7 @@ label {
     background-color: rgba(245, 245, 245, .6);
     border-radius: 15px;
     line-height: 50px;
+    /* padding: 20px; */
     width: 80%;
     display: none;
     margin: 0 auto;
@@ -75,6 +87,10 @@ label {
     border: 2px black solid;
     text-align: center;
     font-size: 15px;
+}
+
+.form {
+    padding: 20px;
 }
 
 .answer:hover {
