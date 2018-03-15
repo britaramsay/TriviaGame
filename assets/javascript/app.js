@@ -4,10 +4,12 @@ var questions = [{question: "Which song have members of the gang never sang toge
                  {question: "Which character stalks the waitress?", answers: ["Mac", "Dee", "Charlie", "Dennis"], correct: 2, gif: "assets/images/charlie-waitress.gif"},
                  {question: "Which is not a drawing from Charlie's dream book?", answers: ["Tooth Oven", "Worm Hat", "Bird with Teeth", "Denim Chicken"], correct: 0, gif: "assets/images/charlie-dream.gif"},
                  {question: "What was Dee's nickname in school?", answers: ["Dr. Mantis Toboggan", "Aluminum Monster", "The Professor", "Wildcard"], correct: 1, gif: "assets/images/Aluminum-Monster.gif"},
-                 {question: "What is the McPoyle's favorite drink?", answers: ["Apple Juice", "Coffee", "Grape Juice", "Milk"], correct: 3, gif: "assets/images/mcpoyles.gif"}];
+                 {question: "What is the McPoyle's favorite drink?", answers: ["Apple Juice", "Coffee", "Grape Juice", "Milk"], correct: 3, gif: "assets/images/mcpoyles.gif"},
+                 {question: "What was Cricket's origional profession??", answers: ["Waiter", "Preacher", "Dog Walker", "Teahcer"], correct: 1, gif: "assets/images/cricket.gif"}];
 
 // Declare interval id             
 var showQuestion;
+var rightAnswer;
 
 // Call newGame when play is clicked
 $("#play").on("click", function() {
@@ -21,6 +23,7 @@ function newGame() {
     correct = 0,
     incorrect = 0,
     unanswered = 0;
+    rightAnswer = '';
     // Call showTimer
     showTimer();
 }
@@ -39,7 +42,7 @@ function showTimer() {
 }
 
 function displayQuestion() {
-    var rightAnswer;
+    // var rightAnswer;
     // Set question html
     $("#question").html(questions[questionNumber].question).show();
         $('#answers').empty();
@@ -97,24 +100,26 @@ function displayQuestion() {
             callNextQuestion(message);
         }
     }
-    function callNextQuestion(msg) {
-        // Empty possible answers
-        $("#answers").empty();
-        // Hide question div
-        $("#question").hide();
-        // Create div for question results
-        var questionResults = $("<div>");
-        // Set html for question results
-        questionResults.append(msg + rightAnswer);
+    
+}
 
-        questionResults.append($('<img>',{id:'gif',src:questions[questionNumber].gif}));
-        // Append to answers div
-        $("#answers").append(questionResults);
-        // Stop the countdown
-        stopCountdown();
-        // Call next question in a few seconds
-        setTimeout(nextQuestion, 5 * 1000);
-    }
+function callNextQuestion(msg) {
+    // Empty possible answers
+    $("#answers").empty();
+    // Hide question div
+    $("#question").hide();
+    // Create div for question results
+    var questionResults = $("<div>");
+    // Set html for question results
+    questionResults.append(msg + rightAnswer);
+
+    questionResults.append($('<img>',{id:'gif',src:questions[questionNumber].gif}));
+    // Append to answers div
+    $("#answers").append(questionResults);
+    // Stop the countdown
+    stopCountdown();
+    // Call next question in a few seconds
+    setTimeout(nextQuestion, 5 * 1000);
 }
   
 function nextQuestion() {
@@ -179,19 +184,11 @@ function count(){
     time--;
     // If time has run out
     if (time < 0) {
-        // Hide/empty Q/A divs
-        $("#question").hide();
-        $("#answers").empty();
-        // Make div for question results
-        var questionResults = $("<div>");
-        // Set results html
-        questionResults.html("<h2>Out of time</h2><p>The answer is </p>" + questions[questionNumber].answers[questions[questionNumber].correct]);
-        // Append to answers
-        $("#answers").append(questionResults);
         // Increment unanswered
         unanswered++;
-        // Call nextQuestion
-        nextQuestion(); 
+        // Set message
+        var message = "<h2>Out of time</h2><p>The answer is ";
+        callNextQuestion(message);
     }
     else{
         // If there is time left, display updated time value
