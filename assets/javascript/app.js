@@ -5,7 +5,10 @@ var questions = [{question: "Which song have members of the gang never sang toge
                  {question: "Which is not a drawing from Charlie's dream book?", answers: ["Tooth Oven", "Worm Hat", "Bird with Teeth", "Denim Chicken"], correct: 0, gif: "assets/images/charlie-dream.gif"},
                  {question: "What was Dee's nickname in school?", answers: ["Dr. Mantis Toboggan", "Aluminum Monster", "The Professor", "Wildcard"], correct: 1, gif: "assets/images/Aluminum-Monster.gif"},
                  {question: "What is the McPoyle's favorite drink?", answers: ["Apple Juice", "Coffee", "Grape Juice", "Milk"], correct: 3, gif: "assets/images/mcpoyles.gif"},
-                 {question: "What was Cricket's origional profession??", answers: ["Waiter", "Preacher", "Dog Walker", "Teahcer"], correct: 1, gif: "assets/images/cricket.gif"}];
+                 {question: "What was Cricket's origional profession??", answers: ["Waiter", "Preacher", "Dog Walker", "Teahcer"], correct: 1, gif: "assets/images/cricket.gif"},
+                 {question: "Who played the Nightman in 'The Nightman Cometh'?", answers: ["Charlie", "Frank", "Dennis", "Mac"], correct: 3, gif: "assets/images/nightman.gif"},
+                 {question: "Which character gets 'salted' in the show?", answers: ["Maureen Ponderosa", "Gail the Snail", "The Waitress", "Artemis"], correct: 1, gif: "assets/images/snail.gif"},
+                 {question: "What does the tattoo that Charlie gave himself say?", answers: ["Waitress", "Asleep", "Ladder", "Badnew"], correct: 3, gif: "assets/images/badnew.jpg"}];
 
 // Declare interval id             
 var showQuestion;
@@ -70,8 +73,6 @@ function displayQuestion() {
             div.appendChild(answer);
             // Append label to form
             form.appendChild(div);
-            // Show answers div
-            // document.getElementById('answers').style.display = 'block';
             // Set right answer for this question
             rightAnswer = questions[questionNumber].answers[questions[questionNumber].correct];
             // Append form to answers
